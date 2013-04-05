@@ -9,26 +9,17 @@ popular plug-ins and the most common mappings.
 The distribution is completely customisable using a `~/.vimrc.before`
 and `~/.vimrc.after` Vim RC files.
 
-# UPGRADING FROM BEFORE JANUARY 10th 2012 and after JANUARY 1st 2012
+## Updating to the latest version
 
-Please run `rake` twice before running macvim, make sure `command-t` is
-gone
+(Note: If you haven't upgraded since Jan 10, 2012, see instructions
+[below](https://github.com/carlhuda/janus#alternative-upgrade-steps).)
 
-# UPGRADING FROM BEFORE JANUARY 2012
+To update to the latest version of the distribution, just run `rake`
+inside your `~/.vim` directory.
 
-If you were using Janus before January 2012, note that Janus has gone
-through a rewrite to make it more stable and customizable. Most notably,
-you can now disable plugins using `janus#disable_plugin` and customize
-Janus using `~/.vimrc.before` and `~/.vimrc.after`. See the rest of this
-`README` and the [Customization wiki page](https://github.com/carlhuda/janus/wiki/Customization).
-
-To upgrade to the latest version:
-
-1. remove `~/.vim`, `~/.vimrc` and `~/.gvimrc`.
-2. move customizations from `~/.vimrc.local` to `~/.vimrc.before` and
-   `~/.vimrc.after`.
-3. Do the same with `/.gvimrc.local`.
-4. Run the installer: `curl -Lo- http://bit.ly/janus-bootstrap | bash`
+NOTE: If you ever have an error updating Janus relating to a
+missing commit in a submodule, please try running `rake` again before
+submitting an issue.
 
 ## Mailing list
 
@@ -40,10 +31,10 @@ discussion and announcements.
 
 The distribution is designed to work with Vim >= 7.3.
 
-The distribution also require `ack`, `pep8`, `ctags`, `ruby` and `rake`,
-for the most comfortable experience, use the GUI version of Vim. Linux
+The distribution also requires `ack`, `ctags`, `git`, `ruby` and `rake`.
+For the most comfortable experience, use the GUI version of Vim. Linux
 users should install `gvim`, OSX users should install
-[MacVim](http://code.google.com/p/macvim/), the recommended way of
+[MacVim](http://code.google.com/p/macvim/). The recommended way of
 installing MacVim is using
 [Homebrew](http://mxcl.github.com/homebrew/), but before installing
 MacVim you need to use system-wide Python (If you are using python that
@@ -55,7 +46,7 @@ is):
 $ brew install macvim
 ```
 
-If you don't use Homebrew, you can still download it
+If you don't use Homebrew, you can still download MacVim
 [here](https://github.com/b4winckler/macvim/downloads).
 
 Take a look at the [Pre-requisites wiki
@@ -67,19 +58,19 @@ information.
 
 To install Janus, please use our [automatic
 installer](https://github.com/carlhuda/janus/blob/master/bootstrap.sh)
-, which backups up any Vim files found in your home folder and installs
+, which backs up any Vim files found in your home folder and installs
 Janus.
 
 ```bash
-$ curl -Lo- http://bit.ly/janus-bootstrap | bash
+$ curl -Lo- https://bit.ly/janus-bootstrap | bash
 ```
 
 ## Customization
 
-You can use `~/.gvimrc.before` and `~/.vimrc.before` for settings Janus,
-like the __leader__ setting, you may also use `~/.gvimrc.after` and
+You can use `~/.gvimrc.before` and `~/.vimrc.before` for settings Janus itself uses,
+such as the __leader__ setting. You may also use `~/.gvimrc.after` and
 `~/.vimrc.after` for any additional settings; it is also a good place for
-overriding Janus settings as both files will be loaded at the end of
+overriding Janus settings, as both files will be loaded at the end of
 Janus.
 
 For example, to override the default color schemes:
@@ -96,20 +87,20 @@ This directory is treated like a normal pathogen directory. For example:
 
 ```bash
 $ cd ~/.janus
-$ git checkout git://github.com/vim-scripts/Rename2.git rename2
+$ git clone https://github.com/vim-scripts/Rename2.git rename2
 ```
 
 Or, if you have a git repository in `~/.janus`, you can use a submodule:
 
 ```bash
 $ cd ~/.janus
-$ git submodule add git://github.com/vim-scripts/Rename2.git rename2
+$ git submodule add https://github.com/vim-scripts/Rename2.git rename2
 ```
 
 If you would like to disable an included plug-in, you can do that with
 the `janus#disable_plugin()` function from inside your
-`~/.vimrc.before`, this function takes a plug-in name as an argument
-without the group, for example, if you would like to disable the
+`~/.vimrc.before`. This function takes a plug-in name as an argument
+without the group. For example, if you would like to disable the
 NERDCommenter plug-in, you can do that with the command:
 
 ```bash
@@ -117,20 +108,20 @@ $ echo "call janus#disable_plugin('nerdcommenter')" >> ~/.vimrc.before
 ```
 
 **WARNING**: We've noticed over and over, that people fork Janus just to
-customize it, this is bad practice for several reasons and you should
-not do that, here's why:
+customize it. This is bad practice for several reasons and you should
+not do that, and here's why:
 
 - Janus is fully customisable and there's no need to change the core for
   using a different plugin fork or using a different mapping.
-- Forking means maintenance, maintenance means burden, do not burden
-  yourself with maintaining a fork, that's what the `~/.janus` folder
+- Forking means maintenance; maintenance means burden. Do not burden
+  yourself with maintaining a fork; that's what the `~/.janus` folder
   is for.
 
-if you find yourself needing a customisation that is not possible with
-the current setup, then please open an issue or submit a pull request to
-make it possible to do so without having a fork.
+If you find yourself needing a customisation that is not possible with
+the current setup, then please open an issue or consider submitting a
+pull request to make it possible to continue using/improving the official repo.
 
-**WARNING**: Any **uncommited** file inside the **janus** folder will be
+**WARNING**: Any **uncommited** files inside the **janus** folder will be
 removed the next time you run `rake` so make sure to either put them in
 the custom folder (`~/.janus`), or commit them. We clean the janus
 folder in case we replace a manually installed plugin (using rake tasks)
@@ -140,25 +131,16 @@ For more information on how to customize Janus, you might want to take
 a look at the [Customization wiki
 page](https://github.com/carlhuda/janus/wiki/Customization).
 
-## Updating to the latest version
-
-To update to the latest version of the distribution, just run `rake`
-again inside your `~/.vim` directory.
-
-NOTE: If you even had an error updating Janus, problem related to a
-missing commit in a submodule, please try running `rake` again before
-submitting an issue.
-
 # Intro to VIM
 
-Here's some tips if you've never used VIM before:
+Here're some tips in case you've never used VIM before:
 
 ## Tutorials
 
 * Type `vimtutor` into a shell to go through a brief interactive
   tutorial inside VIM.
 * Read the slides at [VIM: Walking Without Crutches](http://walking-without-crutches.heroku.com/#1).
-* Watch the screen-casts at [vimcasts.org](http://vimcasts.org/)
+* Watch the screencasts at [vimcasts.org](http://vimcasts.org/)
 * Watch Derek Wyatt's energetic tutorial videos at [his site](http://www.derekwyatt.org/vim/vim-tutorial-videos/)
 * Read wycats' perspective on learning Vim at
   [Everyone who tried to convince me to use vim was wrong](http://yehudakatz.com/2010/07/29/everyone-who-tried-to-convince-me-to-use-vim-was-wrong/)
@@ -167,19 +149,22 @@ Here's some tips if you've never used VIM before:
 
 ## Modes
 
-* VIM has two modes:
+* VIM has three modes:
   * insert mode- stuff you type is added to the buffer
   * normal mode- keys you hit are interpreted as commands
+  * visual mode- allows you to select blocks of text
 * To enter insert mode, hit `i`
 * To exit insert mode, hit `<ESC>`
+* To enter visual mode, hit `v`
+* To exit visual mode, hit `<ESC>`
 
 ## Useful commands
 
 * Use `:q` to exit vim
 * Certain commands are prefixed with a `<Leader>` key, which maps to `\`
-  by default. Use `let mapleader = ","` to change this. If you want this
-  to be in effect for uses of <Leader> in your .vimrc, make sure to define
-  this in the `~/.vimrc.before`
+  by default. You can, for example, use `let mapleader = ","` to change this to a comma. If you want this
+  to be in effect for uses of `<Leader>` in the .vimrc file, make sure to define
+  this in `~/.vimrc.before`
 * Keyboard [cheat sheet](http://walking-without-crutches.heroku.com/image/images/vi-vim-cheat-sheet.png).
 
 # Features
@@ -192,9 +177,9 @@ Janus ships with a number of basic customizations for vim:
 
 * Line numbers
 * Ruler (line and column numbers)
-* No wrap (turn off per-buffer via set :wrap)
+* No wrap (turn off per-buffer via :set wrap)
 * Soft 2-space tabs, and default hard tabs to 2 spaces
-* Show tailing whitespace as `.`
+* Show trailing whitespace as `.`
 * Make searching highlighted, incremental, and case insensitive unless a
   capital letter is used
 * Always show a status line
@@ -204,49 +189,44 @@ Janus ships with a number of basic customizations for vim:
 * Automatically resize splits when resizing the Vim window (GUI only)
 * `<leader>ew` expands to `:e (directory of current file)/` (open in the
   current buffer)
-* `<leader>es` expands to `:sp (directory of current file)/` (open in an
+* `<leader>es` expands to `:sp (directory of current file)/` (open in a
   horizontal split)
 * `<leader>ev` expands to `:vsp (directory of current file)/` (open in
-  an vertical split)
+  a vertical split)
 * `<leader>et` expands to `:tabe (directory of current file)/` (open in
-  an new tab)
-* `:w!!` expands to `%!sudo tee > /dev/null %` Write to the current file
-  using sudo (if you forgot to run it with sudo), it will prompt for
-sudo password when writing.
-* `<F4>` Toggles paste mode
-* `<leader>fef` format the entire file
-* `,.` (comma followed by a dot) opens the next buffer.
-* `,m` (comma followed by m) opens the previous buffer.
-* `;'` (semi-column followed by a single quote) switch to next tab.
-* `;l` (semi-column followed by l) switch to previous tab.
-* `<leader>u` Convert the entire word to uppercace.
-* `<leader>l` Convert the entire word to lowercase.
-* `<leader>U` Convert the first char of a word to uppercase.
-* `<leader>L` Convert the first char of a word to lowercase.
-* `<leader>cd` Change the path to the currently active buffer's file.
-* `<leader>md` Make the directory of the currently active buffer's file
-  (for example when editing a new file for which the path does not
+  a new tab)
+* Write a privileged file with `:SudoW` or `:SudoWrite`, it will prompt
+  for sudo password when writing
+* `<F4>` toggles paste mode
+* `<leader>fef` formats the entire file
+* `<leader>u` converts the entire word to uppercace
+* `<leader>l` converts the entire word to lowercase
+* `<leader>U` converts the first char of a word to uppercase
+* `<leader>L` converts the first char of a word to lowercase
+* `<leader>cd` changes the path to the active buffer's file
+* `<leader>md` creates the directory of the active buffer's file
+  (For example, when editing a new file for which the path does not
 exist.)
-* `gw` Swap the current word with the one next to it.
-* `<leader>ul` Underline the current line with `=`
-* `<leader>tw` Toggle wrap
-* `<leader>fc` Finds the next conflict marker (Tested with Git
-  conflicted files).
+* `gw` swaps the current word with the following word
+* `<leader>ul` underlines the current line with `=`
+* `<leader>tw` toggles wrap
+* `<leader>fc` finds the next conflict marker (tested with Git
+  conflicted files)
 * Remap `<Down>` and `<Up>` to `gj` and `gk` (Wrapped text is not
-  considered a one-long-line of text.
-* `<leader>hs` Toggle highlight search.
-* `<leader>=` Adjust viewports to the same size (`<C-w>=`)
-* `<A-[` (`<D-[` on MacVim) Shift current line or selected lines
-  rightwards.
-* `<A-]` (`<D-]` on MacVim) Shift current line or selected lines
-  leftwards.
-* `<C-W>!` Invokes kwbd plugin, it closes all open buffers in the open
-  windows but keeps the windows open.
+  considered a single long line of text.)
+* `<leader>hs` toggles highlight search
+* `<leader>=` adjusts viewports to the same size (`<C-w>=`)
+* `<A-[` (`<D-[` on MacVim) shifts current line or selected lines
+  rightwards
+* `<A-]` (`<D-]` on MacVim) shifts current line or selected lines
+  leftwards
+* `<C-W>!` invokes kwbd plugin; it closes all open buffers in the open
+  windows but keeps the windows open
 
 ## [Ack.vim](http://github.com/mileszs/ack.vim)
 
 Ack.vim uses ack to search inside the current directory for a pattern.
-You can learn more about it with :help Ack
+You can learn more about it with :help Ack.
 
 **Customizations**: Janus rebinds command-shift-f (`<D-F>`) to bring up
 `:Ack `.
@@ -280,6 +260,20 @@ NERDTree:
 * In general, assume that there is a single NERDTree buffer on the left
   and one or more editing buffers on the right
 
+## [Unimpaired](https://github.com/tpope/vim-unimpaired)
+
+This plugin provides a lot of useful mappings, here's a brief example of
+what it does provide:
+
+* `[b` to go to the previous buffer
+* `]b` to go to the next buffer
+* `[n` to go to the previous SCM conflict marker
+* `]n` to go to the next SCM conflict marker
+
+Please check [`:help
+unimpaired`](https://github.com/tpope/vim-unimpaired/blob/master/doc/unimpaired.txt)
+for a complete list
+
 ## [SuperTab](http://github.com/ervandew/supertab)
 
 In insert mode, start typing something and hit `<TAB>` to tab-complete
@@ -301,7 +295,7 @@ Tagbar is a vim plugin for browsing the tags of source code files.
 ## [EasyMotion](https://github.com/Lokaltog/vim-easymotion)
 
 EasyMotion provides a much simpler way to use some motions in vim. It
-takes the <number> out of <number>w or <number>f{char} by highlighting
+takes the `<number>` out of `<number>w` or `<number>f{char}` by highlighting
 all possible choices and allowing you to press one key to jump directly
 to the target.
 
@@ -344,7 +338,7 @@ file
 * `<leader>gd` maps to `:Gdiff<CR>`
 * `<leader>gl` maps to `:Glog<CR>`
 * `<leader>gc` maps to `:Gcommit<CR>`
-* `<leager>gp` maps to `:Git push<CR>`
+* `<leader>gp` maps to `:Git push<CR>`
 
 ## [ZoomWin](http://github.com/vim-scripts/ZoomWin)
 
@@ -371,6 +365,22 @@ can "walk" up and down the list of buffers shown in the catalog by using
 next/previous buffer in succession, respectively, opening it for preview
 without leaving the buffer catalog viewer.
 
+## [Vroom](https://github.com/skalnik/vim-vroom)
+
+VRoom is a plugin inspired by [Gary Bernhardt's vim
+config](https://github.com/garybernhardt/dotfiles/blob/69330074b7a15c67efa4594a71fa91592f1ce4f9/.vimrc#L286-342) 
+for running your ruby tests/specs/features.
+
+Imagine you're hacking on a Rails controller, when you switch to the
+test or specs for the controller, you can use `<leader>r` to run all the
+specs or `<leader>R` to run the closest spec, then you can jump back to
+the controller hack on it and use `<leader>r` to run the last spec you
+ran last time, so you don't need to open the test again.
+
+Then benefits of this plugin are to centralize your workflow in one
+window, one software to do it all, which is a huge speedup over using
+`tmux` or multiple terminal tabs.
+
 ## Additional Syntaxes
 
 Janus ships with a few additional syntaxes:
@@ -396,7 +406,31 @@ Rakefile then please head over to the [rakefile
 branch](https://github.com/carlhuda/janus/tree/rakefile) but please note
 that the rakefile branch will not be maintained.
 
-## License
+# Alternative Upgrade Steps
+
+## Upgrading from before January 1st, 2012
+
+If you were using Janus before January 2012, note that Janus has gone
+through a rewrite to make it more stable and customizable. Most notably,
+you can now disable plugins using `janus#disable_plugin` and customize
+Janus using `~/.vimrc.before` and `~/.vimrc.after`. See the rest of this
+`README` and the [Customization wiki page](https://github.com/carlhuda/janus/wiki/Customization).
+
+## Upgrading from January 1st, 2012 through January 10th
+
+Please run `rake` twice before running macvim; make sure `command-t` is
+gone.
+
+To upgrade to the latest version:
+
+1. remove `~/.vim`, `~/.vimrc` and `~/.gvimrc`.
+2. move customizations from `~/.vimrc.local` to `~/.vimrc.before` and
+   `~/.vimrc.after`.
+3. Do the same with `/.gvimrc.local`.
+4. Run the installer: `curl -Lo- https://bit.ly/janus-bootstrap | bash`
+
+
+# License
 
 ### This code is free to use under the terms of the MIT license.
 

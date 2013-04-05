@@ -31,11 +31,15 @@ submodules:
     sampler-pack:
     solarized:
     vividchalk:
+    janus-colors:
+      dependencies:
+        - sampler-pack
 
 
   # Langs
   #
   langs:
+    arduino:
     coffeescript:
       categories:
         - coffeescript
@@ -50,6 +54,8 @@ submodules:
         - rails
         - syntax
         - behavior driven development
+    elixir:
+    erlang:
     git:
       categories:
         - git
@@ -60,8 +66,11 @@ submodules:
         - rails
         - syntax
     handlebars:
+    haskell:
     javascript:
+    less:
     markdown:
+    minitest:
     nodejs:
     puppet:
     rails:
@@ -69,7 +78,9 @@ submodules:
     ruby:
     scala:
     scss:
+    slim:
     textile:
+    clojure:
 
 
   # Tools
@@ -77,26 +88,29 @@ submodules:
   tools:
     ack:
     buffergator:
-    command-t:
     css-color:
+    ctrlp:
     easymotion:
     endwise:
     fugitive:
+    webapi:
     gist:
+      dependencies:
+        - webapi
     gundo:
-    hammer:
     indent-object:
     kwbd:
+    eunuch:
     matchit:
     narrowregion:
     nerdcommenter:
     nerdtree:
-    pep8:
+    repeat:
     snipmate:
       dependencies:
         - vim-addon-mw-utils
         - tlib
-    snipmate-snippets:
+    vim-snippets:
       dependencies:
         - snipmate
     supertab:
@@ -108,4 +122,4 @@ submodules:
     vim-addon-mw-utils:
     vimwiki:
     zoomwin:
-    rename2:
+    vroom:
