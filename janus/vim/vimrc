@@ -44,6 +44,7 @@ filetype plugin indent on
 
 " Give a shortcut key to NERD Tree
 map <F2> :NERDTreeToggle<CR>
+map \n :NERDTreeToggle<CR>
 
 " Use mouse
 set mouse=a
@@ -53,3 +54,6 @@ noremap H <C-w>h
 noremap J <C-w>j
 noremap K <C-w>k
 noremap L <C-w>l
+
+" Render partial
+noremap <C-H> :Rextract 
