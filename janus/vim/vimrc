@@ -32,3 +32,20 @@ endif
 call janus#load_pathogen()
 
 " .vimrc.after is loaded after the plugins have loaded
+
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+
+
+" Give a shortcut key to NERD Tree
+map <F2> :NERDTreeToggle<CR>
+
+" Use mouse
+set mouse=a
+
+" Map window movement
+noremap H <C-w>h
+noremap J <C-w>j
+noremap K <C-w>k
+noremap L <C-w>l
